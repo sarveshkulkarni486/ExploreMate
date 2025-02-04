@@ -1,0 +1,81 @@
+.footer {
+  background-color: #282c34; /* Dark background color */
+  color: #ffffff; /* White text color */
+  padding: 40px 20px; /* Padding for the footer */
+  font-family: 'Arial', sans-serif; /* Font family */
+  position: relative; /* Positioning for potential absolute children */
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items */
+  margin-bottom: 20px; /* Space below the content */
+}
+
+.footer-description {
+  text-align: center; /* Center the description text */
+  margin-bottom: 20px; /* Space below the description */
+  font-size: 1.2em; /* Increase font size */
+  line-height: 1.5; /* Improve readability */
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-around; /* Space sections evenly */
+  width: 100%; /* Full width */
+  max-width: 800px; /* Limit max width */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.footer-section {
+  margin: 0 20px; /* Space between sections */
+  flex: 1; /* Allow sections to grow equally */
+  min-width: 150px; /* Minimum width for responsiveness */
+}
+
+.footer-section h4 {
+  margin-bottom: 10px; /* Space below section titles */
+  font-size: 1.5em; /* Increase font size for section titles */
+  border-bottom: 2px solid #ffffff; /* Underline section titles */
+  padding-bottom: 5px; /* Space below the underline */
+}
+
+.footer-section ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+}
+
+.footer-section li {
+  margin-bottom: 10px; /* Space between list items */
+}
+
+.footer-section a {
+  color: #ffffff; /* White text color for links */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.footer-section a:hover {
+  color: #61dafb; /* Change color on hover */
+}
+
+.footer-bottom {
+  text-align: center; /* Center the copyright text */
+  margin-top: 20px; /* Space above the copyright text */
+  font-size: 0.9em; /* Smaller font size for copyright */
+  border-top: 1px solid #ffffff; /* Add a top border for separation */
+  padding-top: 10px; /* Space above the copyright text */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .footer-links {
+    flex-direction: column; /* Stack sections vertically on small screens */
+    align-items: center; /* Center items */
+  }
+
+  .footer-section {
+    margin: 10px 0; /* Space between sections */
+  }
+}

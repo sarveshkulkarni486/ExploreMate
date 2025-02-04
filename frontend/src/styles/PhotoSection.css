@@ -1,0 +1,51 @@
+.photo-section {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.photo-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.photo-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.photo-item {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow in the normal state */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for both shadow and scaling */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.photo-item:hover {
+    transform: scale(1.05); /* Slight scale effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Slightly more visible black shadow on hover */
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.category {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}

@@ -1,0 +1,37 @@
+/* Basic structure for the modal */
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 20px;
+}
+
+/* Style for the video */
+.responsive-video {
+    width: 80%; /* Make video take full width of the container */
+    max-width: 500px; /* Max width to prevent it from growing too large on very wide screens */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Scale video to fit container without distortion */
+    border-radius: 8px; /* Optional rounded corners */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 720px) {
+    .responsive-video {
+        max-width: 90%; /* Reduce video size for tablets */
+    }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+    .responsive-video {
+        max-width: 95%; /* Further reduce video size for mobile devices */
+    }
+}

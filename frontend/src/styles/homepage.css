@@ -1,0 +1,123 @@
+/* Make sure the carousel spans the full width of the viewport */
+.carousel {
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    position: relative;
+    scroll-behavior: smooth;
+    overflow: visible;
+  }
+  
+  .carousel-inner {
+    height: 100%; /* Ensure the inner container takes the full height */
+  }
+  
+  .carousel-item {
+    display: flex; /* To enable the content inside to scroll */
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensures item stretches to full height */
+    overflow: hidden; /* Hide overflow within each item */
+  }
+  
+  .carousel-item img {
+    object-fit: cover; /* Ensure the image covers the entire container */
+    width: 100%; /* Make the image span the full width */
+    height: 100%; /* Make the image span the full height */
+  }
+  
+  .carousel-caption {
+    bottom: 20px; /* Adjust caption position from the bottom */
+    left: 20px; /* Adjust caption position from the left */
+    right: 20px; /* Adjust caption position from the right */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Background Overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better contrast */
+    z-index: 1;
+  }
+  
+  /* Search Panel */
+  .search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-radius: 30px;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+    z-index: 2;
+  }
+  
+  /* Location and Date Input Fields */
+  .location,
+  .dates {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  }
+  
+  .search-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #6c63ff;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+  
+  .form-control:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+    outline: none;
+  }
+  
+  /* Explore Button */
+  .explore-button {
+    background-color: #6c63ff;
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .explore-button:hover {
+    background-color: #5752c7;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .search-container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 20px;
+    }
+  
+    .location,
+    .dates {
+      margin-right: 0;
+    }
+  
+    .explore-button {
+      align-self: center;
+    }
+  }
+  

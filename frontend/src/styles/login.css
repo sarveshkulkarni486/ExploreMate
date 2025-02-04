@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Ubuntu:wght@700&display=swap');
+form {
+    font-family: 'Lato', sans-serif;
+    background-color: white;
+}
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 100vh;
+}
+.col-12 {
+    margin-left: 2rem;
+    width: 47%;
+    height: 60%;
+}
+.img-fluid {
+    margin-top: 5rem;
+    width: 100%;
+    height: 90%;
+    margin-right: 5rem;
+}
+.login-form {
+    margin-left: 5rem;
+    width: 320px !important;
+    height: 420px !important;
+    box-shadow: rgb(0, 0, 0 / 16%) 1px 1px 10px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid rgb(34, 34, 34);
+}
+.login-form-content {
+    padding-left: 20%;
+    padding-right: 12%;
+}
+h3 {
+    text-align: center;
+    font-family: 'lato', monospace;
+    font-weight: bold;
+}
+.text-center {
+    margin-top: 3rem;
+}
+.link-primary {
+    cursor: pointer;
+}
+.login-form-title {
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 24px;
+    color: rgb(34, 34, 34);
+    font-weight: 800;
+}
+form label {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    color: rgb(34, 34, 34);
+    display: block !important;
+    margin-bottom: 5px !important;
+    text-align: start;
+}
+.logo-container {
+    display: inline-block;
+    margin-right: 10px; 
+    vertical-align: middle; 
+}
+
+/* Style the logo with a border or shadow to make it stand out */
+.company-logo {
+    width: 80px; /* Adjust the size of the logo */
+    height: auto;
+    vertical-align: middle; /* Align logo vertically in line with text */
+    border: 2px solid #007bff; /* Add a border to make the logo stand out */
+    padding: 5px; /* Add some padding around the logo */
+    border-radius: 50%; /* Make the logo circular */
+    background-color: white; /* Set a white background to contrast with border */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a slight shadow */
+}
+
+
+
+.cursor-pointer {
+    cursor: pointer;
+}
+@media(max-width:720px){
+    .company-logo{
+        margin-left: 5.3rem !important;
+    }
+    .img-fluid {
+        margin-right: 2rem !important;
+        margin-left: 2rem !important;
+        width: 130% !important;
+        height: auto !important;
+    }
+    .container-fluid {
+        width: 45rem;
+        scroll-behavior: smooth;
+        height: auto;
+        margin-right: 2.5rem !important;
+        margin-left: -1rem;
+        padding-right: 3rem;
+    }
+}
+@media(max-width: 920px) and (min-width: 750px){
+    .container-fluid {
+        width: 45rem;
+        scroll-behavior: smooth;
+        height: auto;
+        margin-right: 2.5rem !important;
+        margin-left: 0rem;
+        padding-right: 3rem;
+    }
+}
+
+/* Target devices like iPads and larger tablets */
+@media (min-width: 600px) and (max-width: 1024px) {
+    .company-logo{
+        margin-left: 10rem !important;
+    }
+    .img-fluid {
+        margin-right: 2rem !important;
+        margin-left: 2rem !important;
+        width: 120% !important;
+        height: auto !important;
+    }
+    .container-fluid {
+        width: 65rem;
+        scroll-behavior: smooth;
+        height: auto;
+        margin-right: 2.5rem !important;
+        margin-left: 8rem;
+        padding-right: 3rem;
+    }
+  }
+
+  /* Target iPhones (small screens with high pixel density) */
+@media (min-width: 320px) and (max-width: 480px) {
+    .company-logo{
+        margin-left: 5.3rem !important;
+    }
+    .img-fluid {
+        margin-right: 2rem !important;
+        margin-left: 2rem !important;
+        width: 130% !important;
+        height: auto !important;
+    }
+    .container-fluid {
+        width: 45rem;
+        scroll-behavior: smooth;
+        height: auto;
+        margin-right: 2.5rem !important;
+        margin-left: -1rem;
+        padding-right: 3rem;
+    }
+  }
+   
+  /* Target Android phones (similar dimensions to iPhones) */
+@media (min-width: 360px) and (max-width: 640px) {
+    .company-logo{
+        margin-left: 5.3rem !important;
+    }
+    .img-fluid {
+        margin-right: 2rem !important;
+        margin-left: 2rem !important;
+        width: 130% !important;
+        height: auto !important;
+    }
+    .container-fluid {
+        width: 45rem;
+        scroll-behavior: smooth;
+        height: auto;
+        margin-right: 2.5rem !important;
+        margin-left: -0.8rem;
+        padding-right: 3rem;
+    }
+  }
+
+  /* Target Apple Watch screens */
+@media (max-width: 400px) and (min-resolution: 2dppx) and (max-aspect-ratio: 4/5) {
+    .company-logo{
+        margin-left: 0rem !important;
+    }
+    .img-fluid {
+        margin-right: 0rem !important;
+        margin-left: 0rem !important;
+        width: fit-content !important;
+        height: auto !important;
+    }
+    .container-fluid {
+        width: fit-content;
+        scroll-behavior: smooth;
+        height: auto;
+        margin-right: 2.5rem !important;
+        margin-left: -0.8rem;
+        padding-right: 3rem;
+    }
+  }
+  
+  
