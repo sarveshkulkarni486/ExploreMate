@@ -8,6 +8,8 @@ import '../styles/login.css';
 import LogoImg from '../assets/logo.png';
 import { useDispatch } from "react-redux";
 import { login } from "../redux/actions/authAction";
+import { loginUser, registerUser, forgotPassword } from "../services/api";
+import axios from "axios";
 const Login = () => {
     const [formMode, setFormMode] = useState("signin");
     const [firstname, setFirstName] = useState('');
@@ -17,7 +19,6 @@ const Login = () => {
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
 
     const validateEmail = (email) => {
@@ -40,7 +41,7 @@ const Login = () => {
         return passwordRegex.test(password);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setSuccessMessage('');
@@ -59,16 +60,22 @@ const Login = () => {
             setError("Invalid password. It must be 8-18 characters long, start with a letter, and include at least one number and one special character.");
             return;
         }
+
+        try {
+            const response = await loginUser(email, password);
+            dispatch(login(response));
+            setSuccessMessage("Logged in successfully");
+            navigate("/");
+        }catch(error){
+            setError(error.message || "Login failed");
+        }
+
         const userData = {firstname}
 
-        setSuccessMessage('Logged in successfully!');
-        console.log('Logging in with ', email, password);
-
-        navigate('/');
         dispatch(login(userData));
     };
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
         setError('');
         setSuccessMessage('');
@@ -95,10 +102,13 @@ const Login = () => {
             setError("Invalid password. It must be 8-18 characters long, start with a letter, and include at least one number and one special character.");
             return;
         }
-
-        setSuccessMessage('Signed up successfully!');
-        console.log('Signing up with ',firstname, lastname, email, password);
-
+        try{
+            const response = await registerUser(`${firstname} ${lastname}`, email, password);
+            setSuccessMessage("Signed up successfully");
+            setFormMode("signin");
+        }catch(error) {
+            setError(error.message || "Registration failed");
+        }
         setFormMode('signin');
     };
 
@@ -119,7 +129,8 @@ const Login = () => {
         setFormMode(mode);
         setError('');
         setSuccessMessage('');
-        setName('');
+        setFirstName('');
+        setLastName('');
         setEmail('');
         setPassword('');
     };

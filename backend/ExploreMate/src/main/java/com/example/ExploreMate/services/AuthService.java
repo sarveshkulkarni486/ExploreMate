@@ -57,11 +57,16 @@ public class AuthService {
 	public ResponseEntity<?> loginUser(String email, String password) {
 		Optional<User> user = userRepository.findByEmailId(email);
 		if(!user.isPresent()) {
-			logger.warn("Wrong email: ", email);
+			logger.warn("Wrong email: {}", email);
 			return ResponseEntity.badRequest().body("User not found");
 		}
 		User user1 = user.get();
+		
+		logger.info("Stored password (hashed): {}", user1.getPassword());
+		logger.info("Raw password input: {}", password);
+		
 		if(!passwordEncoder.matches(password, user1.getPassword())) {
+			logger.warn("Invalid Password Attempt for email: {}", email);
 			return ResponseEntity.badRequest().body("Invalid Password ");
 		}
 		

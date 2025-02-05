@@ -4,18 +4,18 @@ import jakarta.persistence.Entity;
 
 
 public class LoginUser {
-	private String email;
+	private String emailId;
 	private String password;
-	public LoginUser(String email, String password) {
+	public LoginUser(String emailId, String password) {
 		super();
-		this.email = email;
+		this.emailId = emailId;
 		this.password = password;
 	}
 	public String getEmail() {
-		return email;
+		return emailId;
 	}
 	public void setEmail(String email) {
-		this.email = email;
+		this.emailId = email;
 	}
 	public String getPassword() {
 		return password;
