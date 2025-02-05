@@ -34,7 +34,7 @@ function Home() {
                   onChange={(e) => setDate(e.target.value)}
                 />
               </div>
-              <button className="explore-button">Explore Now</button>
+              <button className="explore-button" onClick={()=> navigate("/map")}>Explore Now</button>
             </div>
           </div>
         </div>

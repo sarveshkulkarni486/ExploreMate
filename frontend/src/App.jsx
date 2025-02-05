@@ -8,6 +8,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Tours from './components/Tours';
 import Guides from './components/Guides';
+import BookNow from './components/BookNow';
 function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -69,6 +70,7 @@ function App() {
           />
           {/* Login route without Navbar */}
           <Route path="/Login" element={<Login />} />
+          <Route path="/map" element={<BookNow />} />
         </Routes>
       </Router>
       )}
