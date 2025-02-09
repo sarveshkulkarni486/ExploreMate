@@ -44,7 +44,7 @@ public class JwtUtility {
 	public Date extractExpiration(String token) {
 		return extractClaim(token, Claims::getExpiration);
 	}
-	private boolean isTokenExpired(String token) {
+	public boolean isTokenExpired(String token) {
 		return extractExpiration(token).before(new Date());
 	}
 	private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

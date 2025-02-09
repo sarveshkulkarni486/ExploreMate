@@ -5,6 +5,7 @@ import { FaBell } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/actions/authAction';
 import { login } from '../redux/actions/authAction';
+import { useNavigate } from 'react-router-dom';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -33,6 +34,7 @@ export default function Navbar() {
     dispatch(logout());
     setIsDropdownOpen(false);
   };
+  const navigate = useNavigate();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">

@@ -27,7 +27,7 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, JwtRequestFilter jwtRequestFilter) throws Exception {
 		httpSecurity.csrf().disable()
 			.authorizeRequests()
-			.requestMatchers("/error", "/auth/register", "/auth/login")
+			.requestMatchers("/error", "/auth/register", "/auth/login", "/guide/register", "/guide/login", "/guide/getAllGuides", "/bookings/create")
 			.permitAll()
 			.anyRequest().authenticated()
 			.and()

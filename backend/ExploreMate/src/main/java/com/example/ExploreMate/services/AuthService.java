@@ -1,6 +1,8 @@
 package com.example.ExploreMate.services;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -72,9 +74,15 @@ public class AuthService {
 		
 		//Generate JWT token
 		String token = jwtUtil.generateToken(email, user1.getRole().name());
-				
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("token", token);
+		response.put("userId", user.get().getUserId());
+        response.put("name", user.get().getName());
+        response.put("email", user.get().getEmailId());
+        response.put("role", user.get().getRole().name()); 
 		logger.info("User {} logged in successfully", email);
-		return ResponseEntity.ok(token);
+		return ResponseEntity.ok(response);
 	}
 
 	/*

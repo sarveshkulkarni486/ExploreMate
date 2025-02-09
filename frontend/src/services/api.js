@@ -13,9 +13,14 @@ export const loginUser = async(emailId, password)=>{
             emailId: emailId,
             password: password
         });
+        const {token, userId, name, role, email} = response.data;
         //jwt token is send by server as response
         if(response.data && response.data.token){
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('token', token);
+            localStorage.setItem('userId', userId);
+            localStorage.setItem('name', name);
+            localStorage.setItem('role', role);
+            localStorage.setItem('email', email);
         }
         return response.data;
     }catch(error){
@@ -62,3 +67,4 @@ export const getUserProfile = async()=>{
         throw error.response ? error.response.data : error.message;
     }
 }
+

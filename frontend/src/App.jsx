@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Loading from './components/loading';
+import Loading from './components/Loading';
 import Login from './components/Login';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -9,6 +9,10 @@ import Contact from './components/Contact';
 import Tours from './components/Tours';
 import Guides from './components/Guides';
 import BookNow from './components/BookNow';
+import GuideRegister from './components/GuideRegistration';
+import GuideLogin from './components/GuideLogin';
+import GuideDashboard from './components/GuideDashboard';
+import GuideProfile from './components/GuideProfile';
 function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -71,6 +75,10 @@ function App() {
           {/* Login route without Navbar */}
           <Route path="/Login" element={<Login />} />
           <Route path="/map" element={<BookNow />} />
+          <Route path="/guideregister" element={<GuideRegister />} />
+          <Route path="/guidelogin" element={<GuideLogin />}/>
+          <Route path="/guidedash" element={<GuideDashboard />} />
+          <Route path="/guideprof" element={<GuideProfile />} />
         </Routes>
       </Router>
       )}

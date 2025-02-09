@@ -5,9 +5,11 @@ import Footer from './Footer';
 import Tours from './Tours';
 import About from './About';
 import Guides from './Guides';
+import { useNavigate } from 'react-router-dom';
 function Home() {
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
+  const navigate = useNavigate();
   return (
     <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-inner">
