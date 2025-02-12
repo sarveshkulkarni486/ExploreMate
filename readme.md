@@ -81,8 +81,7 @@
 |-----------------------|-----------------------------------------------------------------------------------------------|  
 | **Frontend**          | ![ReactJS](https://img.shields.io/badge/Frontend-ReactJS-blue) ![HTML5](https://img.shields.io/badge/HTML5-orange) ![CSS3](https://img.shields.io/badge/CSS3-blue) |  
 | **Backend**           | ![Spring Boot](https://img.shields.io/badge/Backend-Spring%20Boot-green) ![Node.js](https://img.shields.io/badge/Node.js-green) |  
-| **Database**          | ![MySQL](https://img.shields.io/badge/Database-MySQL-yellow) |  
-| **Architecture**      | Microservices Architecture |  
+| **Database**          | ![MySQL](https://img.shields.io/badge/Database-MySQL-yellow) |   
 | **Deployment**        | ![AWS EC2](https://img.shields.io/badge/Deployment-AWS%20EC2-orange) ![Docker](https://img.shields.io/badge/Docker-blue) |  
 | **Build & Automation**| ![Maven](https://img.shields.io/badge/Maven-red) ![Jenkins](https://img.shields.io/badge/Jenkins-blue) |  
 | **Collaboration**     | ![Git](https://img.shields.io/badge/Git-black) ![GitHub](https://img.shields.io/badge/GitHub-black) |  
@@ -93,7 +92,7 @@
 
 1. Clone the repository:  
    ```bash  
-   git clone https://github.com/yourusername/exploremate.git  
+   git clone https://github.com/sarveshkulkarni486/exploremate.git  
    ```  
 2. Navigate to the project directory:  
    ```bash  
@@ -111,31 +110,6 @@
    npm install  
    npm start  
    ```  
-5. Deploy Docker containers:  
-   ```bash  
-   docker-compose up  
-   ```  
-
----
-
-## 🌟 **Branching Strategy**  
-
-| **Branch Name**        | **Feature**                          |  
-|-------------------------|--------------------------------------|  
-| `main`                 | Stable production-ready code.        |  
-| `feature/authentication`| Login/Signup functionality.          |  
-| `feature/profile`       | Profile creation and guest access.   |  
-| `feature/preferences`   | User preferences setup.              |  
-| `feature/explore-guides`| Guide exploration and search.        |  
-| `feature/booking`       | Booking and payment workflows.       |  
-| `feature/on-trip`       | On-trip interactions and live tracking. |  
-| `feature/review`        | Post-tour review and ratings.        |  
-| `feature/social`        | Social sharing and recommendations.  |  
-| `feature/multi-day-tour`| Multi-day tour packages.             |  
-| `feature/travel-journal`| Traveler’s journal functionality.    |  
-| `feature/local-insights`| Local insights and hidden gems.      |  
-| `feature/photo-service` | Tour photography services.           |  
-
 ---
 
 ## 🤝 **Contributing**  
