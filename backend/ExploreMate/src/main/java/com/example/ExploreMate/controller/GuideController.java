@@ -40,7 +40,6 @@ import io.jsonwebtoken.io.IOException;
 
 @RestController
 @RequestMapping("/guide")
-@CrossOrigin(origins = "http://localhost:5173")
 public class GuideController {
 	@Autowired
 	private GuideService guideService;

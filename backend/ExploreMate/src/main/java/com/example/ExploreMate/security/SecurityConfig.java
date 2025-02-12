@@ -25,15 +25,15 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, JwtRequestFilter jwtRequestFilter) throws Exception {
-		httpSecurity.csrf().disable()
-			.authorizeRequests()
-			.requestMatchers("/error", "/auth/register", "/auth/login", "/guide/register", "/guide/login", "/guide/getAllGuides", "/bookings/create")
-			.permitAll()
-			.anyRequest().authenticated()
-			.and()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-		return httpSecurity.build();
+		httpSecurity
+        .authorizeHttpRequests(auth -> auth
+            .anyRequest().permitAll()
+        )
+        .csrf(csrf -> csrf.disable())
+        .formLogin(form -> form.disable())
+        .httpBasic(http -> http.disable());
+
+    return httpSecurity.build();
 	}
 	
 	@Bean

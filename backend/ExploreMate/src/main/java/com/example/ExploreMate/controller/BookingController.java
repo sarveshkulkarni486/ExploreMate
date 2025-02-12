@@ -2,7 +2,10 @@ package com.example.ExploreMate.controller;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -16,61 +19,76 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ExploreMate.beans.Booking;
 import com.example.ExploreMate.beans.PaymentStatus;
+import com.example.ExploreMate.repository.BookingRepository;
+import com.example.ExploreMate.services.AuthService;
 import com.example.ExploreMate.services.BookingService;
+import com.example.ExploreMate.services.GuideService;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:5173") 
+@RestController 
 @RequestMapping("/bookings")
 public class BookingController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(GuideService.class);
 	
 	@Autowired
 	BookingService bookingService;
 	
+	
+	@Autowired
+	private AuthService authService;
+	
+	@Autowired
+	private GuideService guideService;
+	
+	
+	@Autowired
+	private BookingRepository bookingRepository;
+	
+	
+	
 	@PostMapping("/create")
-	public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
+	public ResponseEntity<?> createBooking(@RequestBody Map<String, Object> bookingData) {
+		System.out.println("Received JSON: " +bookingData);
+		if (!bookingData.containsKey("user_id") || !bookingData.containsKey("guide_id") ||
+		        !bookingData.containsKey("current_location") || !bookingData.containsKey("destination_location")) {
+		        return ResponseEntity.badRequest().body("Missing required fields in the request.");
+		    }
+		
+		
+
+		    Booking booking = new Booking();
+		    booking.setUserId(Long.valueOf(bookingData.get("user_id").toString()));  
+		    booking.setGuideId(Long.valueOf(bookingData.get("guide_id").toString()));
+		    booking.setCurrentLocation(bookingData.get("current_location").toString());
+		    booking.setDestinationLocation(bookingData.get("destination_location").toString());
+		    booking.setPaymentStatus(PaymentStatus.PENDING);
+		    booking.setCreatedAt(LocalDateTime.now());
+		    booking.setUpdatedAt(LocalDateTime.now());
+		    booking.setTotalprice(Double.valueOf(bookingData.get("totalPrice").toString()));
+
+		    Booking createdBooking = bookingService.createBooking(booking);
+		    return ResponseEntity.status(HttpStatus.CREATED).body(createdBooking);
+	}
+	@PostMapping("/update-status/{bookingId}")
+	public ResponseEntity<String> updatePaymentStatus(@PathVariable Long bookingId) {
 	    try {
-	        // Logging the incoming booking data
-	        System.out.println("Booking received: " + booking);
+	    	Optional<Booking> bookingOptional = bookingRepository.findById(bookingId);
+	    	
+	    	if (!bookingOptional.isPresent()) {
+	            return new ResponseEntity<>("Booking ID not found.", HttpStatus.NOT_FOUND);
+	        }
+	    	System.out.println(bookingOptional);
+	    	
+	    	Booking booking = bookingOptional.get();
+	    	booking.setPaymentStatus(PaymentStatus.COMPLETED);
 	        
-	        // Manually setting required fields (if not set in the request)
-	        Booking newBooking = new Booking();
+	        bookingService.updatePaymentStatus(bookingId, "Completed");
 	        
-	        // Set values manually
-	        newBooking.setUserId(booking.getUser());  // from the incoming request
-	        newBooking.setGuideId(booking.getGuide());  // from the incoming request
-	        newBooking.setCurrentLocation(booking.getCurrentLocation());  // from the incoming request
-	        newBooking.setDestinationLocation(booking.getDestinationLocation());  // from the incoming request
 	        
-	        // Manually set createdAt and updatedAt if required
-	        newBooking.setCreatedAt(LocalDateTime.now());  // Set current time for createdAt
-	        newBooking.setUpdatedAt(LocalDateTime.now());  // Set current time for updatedAt
-
-	        // Optionally, set payment status if it's not set
-	        newBooking.setPaymentStatus(PaymentStatus.PENDING);  // Set default payment status (if not provided)
-	        
-	        // Pass the entity with manually set values to the service layer
-	        Booking createdBooking = bookingService.createBooking(newBooking);
-
-	        // Return the created booking
-	        return new ResponseEntity<>(createdBooking, HttpStatus.CREATED);
+	        return new ResponseEntity<>("Payment status updated to COMPLETED.", HttpStatus.OK);
 	    } catch (Exception e) {
-	        // Log the error message for debugging
-	        System.out.println("Error: " + e.getMessage());
-	        
-	        // Return 400 Bad Request in case of an error
-	        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	    	logger.error("Error updating payment status for bookingId: " + bookingId, e);
+	        return new ResponseEntity<>("Failed to update payment status.", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	}
-
-	@PostMapping("/update-status/{bookingId}")
-    public ResponseEntity<String> updatePaymentStatus(
-            @PathVariable Long bookingId, 
-            @RequestBody PaymentStatus status) {
-        try {
-            bookingService.updatePaymentStatus(bookingId, status);
-            return new ResponseEntity<>("Payment status updated successfully.", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Failed to update payment status.", HttpStatus.BAD_REQUEST);
-        }
-    }
 }

@@ -59,6 +59,8 @@ export const registerGuide = async(formData) => {
 export const fetchGuides = async() => {
     try {
         const response= await guideapi.get('/getAllGuides');
+        localStorage.setItem('guides', JSON.stringify(response));
+        console.log(localStorage.getItem('guides'));
         return response.data;
     }catch(error) {
         throw error.response ? error.response.data : error.message;

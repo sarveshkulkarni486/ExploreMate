@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Navbar from "./Navbar";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -13,8 +13,6 @@ const libraries = ["places"];
 const googleMapsApiKey = "AIzaSyAqoP4raR5nH-XemKk4LVgs00nAnZhrOH0";
 
 const BookNow = () => {
-  const location = useLocation();
-  const guideId = location.state?.guideId;
   const [currentLocation, setCurrentLocation] = useState("");
   const [destinationCity, setDestinationCity] = useState("");
   const [selectedPlace, setSelectedPlace] = useState("");
@@ -26,13 +24,19 @@ const BookNow = () => {
   const [duration, setDuration] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const navigate  = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const guideId = searchParams.get("guideId");
+  const price_per_hr = parseFloat(searchParams.get("price_per_hr")); 
+  const userId = localStorage.getItem("userId");
+  
 
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey,
     libraries,
   });
-
   useEffect(() => {
     if (destinationCity) fetchTouristPlaces();
   }, [destinationCity]);
@@ -121,44 +125,44 @@ const BookNow = () => {
     );
   }, [map, currentLocation, selectedPlace]);
 
+  
   const handleBooking = async() => {
-    const userId = localStorage.getItem("userId");
-    if(!userId){
-      setError("User not logged in. Please log in first");
+    if(!userId || !guideId || !currentLocation || !selectedPlace || !distance){
+      setError("Missing required fields");
       return;
     }
-    if(!currentLocation || !selectedPlace){
-      setError("Please select a destination and current location");
-      return;
-    }
-    if(!guideId){
-      setError("No guide selected. Please choose a guide");
-      return;
-    }
+
+    const distancefloat = parseFloat(distance);
+    
+    const total = price_per_hr * distancefloat;
+    const totalPrice = total.toString();
+
+    const bookingData = {
+      user_id: userId,
+      guide_id: guideId,
+      current_location: currentLocation,
+      destination_location: selectedPlace,
+      distance: distance,
+      payment_status: "Pending",
+      totalPrice: totalPrice,
+    };
+    console.log("Total Price:", totalPrice);  
+
+
     setLoading(true);
-    try {
-      console.log("Booking Data:", {
-        user_id: userId,
-        guide_id: guideId,
-        current_location: currentLocation,
-        destination_location: selectedPlace,
-      });
-      
-      const bookingData = {
-        user_id: userId,
-        guide_id: guideId,
-        current_location: currentLocation,
-        destination_location: selectedPlace,
-      };
+    try{
+      console.log("booking data", bookingData);
       const response = await createBooking(bookingData);
-      alert("Booking successful!");
-    }catch(error) {
-      console.error("Booking error:", error);
-      setError("Booking failed. try again");
-    }finally{
-      setLoading(false);
+      console.log("Booking successful", response);
+      alert("Booking confirmed");
+      navigate(`/payment?totalPrice=${totalPrice}`);
+      
+        
+    }catch(error){
+      setError("Failed to create booking");
     }
-  }
+    setLoading(false);
+  };
 
   const handleReset = () => {
     setCurrentLocation("");
@@ -203,6 +207,7 @@ const BookNow = () => {
           <input
             type="text"
             placeholder="Current Location"
+            name="currentLocation"
             value={currentLocation}
             disabled
             style={{ padding: "8px", marginBottom: "10px", backgroundColor: "#ddd" }}
@@ -219,7 +224,7 @@ const BookNow = () => {
           {touristPlaces.length > 0 && (
             <div>
               <label>Select a Tourist Place</label>
-              <select
+              <select name="selectedPlace"
                 onChange={(e) => setSelectedPlace(e.target.value)}
                 style={{ padding: "8px", marginBottom: "10px" }}
               >

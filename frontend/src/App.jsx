@@ -13,6 +13,7 @@ import GuideRegister from './components/GuideRegistration';
 import GuideLogin from './components/GuideLogin';
 import GuideDashboard from './components/GuideDashboard';
 import GuideProfile from './components/GuideProfile';
+import PaymentPage from './components/Payment';
 function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -79,6 +80,7 @@ function App() {
           <Route path="/guidelogin" element={<GuideLogin />}/>
           <Route path="/guidedash" element={<GuideDashboard />} />
           <Route path="/guideprof" element={<GuideProfile />} />
+          <Route path="/payment" element={<PaymentPage />} />
         </Routes>
       </Router>
       )}

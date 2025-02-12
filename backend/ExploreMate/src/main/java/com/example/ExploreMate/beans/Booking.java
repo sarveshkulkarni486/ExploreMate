@@ -33,11 +33,10 @@ public class Booking {
 	private Long guideId;
 
 	
-	@JsonProperty("currentLocation") 
 	@Column(name = "current_location", nullable = false)
 	private String currentLocation;
 
-	@JsonProperty("destinationLocation") 
+	
 	@Column(name = "destination_location", nullable = false)
 	private String destinationLocation;
 
@@ -50,6 +49,9 @@ public class Booking {
 
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt = LocalDateTime.now();
+	
+	@Column(name = "totalprice")
+	private double totalprice;
 
 	@PreUpdate
 	public void setLastUpdate() {
@@ -61,7 +63,7 @@ public class Booking {
 	}
 
 	public Booking(Long id, Long userId, Long guideId, String currentLocation, String destinationLocation,
-			PaymentStatus paymentStatus, LocalDateTime createdAt, LocalDateTime updatedAt) {
+			PaymentStatus paymentStatus, LocalDateTime createdAt, LocalDateTime updatedAt, double totalprice) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -71,6 +73,7 @@ public class Booking {
 		this.paymentStatus = paymentStatus;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.totalprice = totalprice;
 	}
 
 	public Long getId() {
@@ -135,6 +138,14 @@ public class Booking {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	
+	public double getTotalprice() {
+		return totalprice;
+	}
+
+	public void setTotalprice(double totalprice) {
+		this.totalprice = totalprice;
 	}
 
 	@Override

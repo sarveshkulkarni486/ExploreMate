@@ -20,7 +20,6 @@ import com.example.ExploreMate.services.AuthService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 	@Autowired
 	private AuthService authService;

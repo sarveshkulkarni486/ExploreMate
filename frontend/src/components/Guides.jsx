@@ -9,9 +9,13 @@ import { useNavigate } from 'react-router-dom';
 function Guides() {
   const [guides, setGuides] = useState([]);  // State to hold guide data
 
+
   const navigate = useNavigate();
   // Access authentication state
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  
+  const {isAuthenticated, user} = useSelector((state)=> state.auth);
+
+  const userId = localStorage.getItem("userId");
 
   // Fetch guide details on component mount
   useEffect(() => {
@@ -26,19 +30,14 @@ function Guides() {
     getGuides();
   }, []);
 
-  const handleBookNow = (guideId) => {
-    const userId = localStorage.getItem('userId'); //retrieving user
-    if(isAuthenticated){
-      console.log('Navigating to book now with: ', {guideId, userId});
-      navigate('/map', {
-        state: {guideId, userId},
-      });
+  const handleBooking = async (guideId, price_per_hr) => {
+    if(!isAuthenticated){
+      alert("Please log in to book a guide.");
+      navigate("/login");
+      return;
     }
-    else {
-      alert('Please log in to book a guide!');
-    }
+    navigate(`/map?guideId=${guideId}&price_per_hr=${price_per_hr}`);
   };
-
 
   return (
     <div className="guide-section">
@@ -54,12 +53,12 @@ function Guides() {
               />
               <h3>{guide.name}</h3>
               <p>Gender: {guide.gender}</p>
-              <p>Price: {guide.pricePerHr}</p>
+              <p>Price: {guide.price_per_hr}</p>
               <p>Expertise: {guide.expertise}</p>
               
               {/* Show "Book Now" button only if the user is authenticated */}
               {isAuthenticated && (
-                <button className="book-now-button" onClick={() => handleBookNow(guide.id)}>Book Now</button>
+                <button className="book-now-button" onClick={()=> handleBooking(guide.id, guide.price_per_hr)}>Book Now</button>
               )}
             </div>
           ))

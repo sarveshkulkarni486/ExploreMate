@@ -1,6 +1,8 @@
 package com.example.ExploreMate.services;
 
+import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +28,23 @@ public class BookingService {
 	}
 	
 
-	public void updatePaymentStatus(Long bookingId, PaymentStatus status) {
-		Booking booking = bookingRepository.findById(bookingId).orElseThrow(()-> new RuntimeException("Booking not found"));
-		booking.setPaymentStatus(status);
-		bookingRepository.save(booking);
-	}
+	public void updatePaymentStatus(Long bookingId, String status) throws Exception {
+		Optional<Booking> bookingOptional = bookingRepository.findById(bookingId);
+	    if (!bookingOptional.isPresent()) {
+	        throw new Exception("Booking not found.");
+	    }
+
+	    Booking booking = bookingOptional.get();
+
+	    try {
+	        // Convert status string to uppercase before using the enum
+	        PaymentStatus paymentStatus = PaymentStatus.valueOf(status.toUpperCase());
+	        booking.setPaymentStatus(paymentStatus);
+	    } catch (IllegalArgumentException e) {
+	        throw new Exception("Invalid payment status: " + status);
+	    }
+
+	    booking.setUpdatedAt(LocalDateTime.now());
+	    bookingRepository.save(booking);
+    }
 }
