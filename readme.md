@@ -81,58 +81,10 @@
 |-----------------------|-----------------------------------------------------------------------------------------------|  
 | **Frontend**          | ![ReactJS](https://img.shields.io/badge/Frontend-ReactJS-blue) ![HTML5](https://img.shields.io/badge/HTML5-orange) ![CSS3](https://img.shields.io/badge/CSS3-blue) |  
 | **Backend**           | ![Spring Boot](https://img.shields.io/badge/Backend-Spring%20Boot-green) ![Node.js](https://img.shields.io/badge/Node.js-green) |  
-| **Database**          | ![MySQL](https://img.shields.io/badge/Database-MySQL-yellow) |   
+| **Database**          | ![MySQL](https://img.shields.io/badge/Database-MySQL-yellow) |  
+| **Architecture**      | Microservices Architecture |  
 | **Deployment**        | ![AWS EC2](https://img.shields.io/badge/Deployment-AWS%20EC2-orange) ![Docker](https://img.shields.io/badge/Docker-blue) |  
 | **Build & Automation**| ![Maven](https://img.shields.io/badge/Maven-red) ![Jenkins](https://img.shields.io/badge/Jenkins-blue) |  
 | **Collaboration**     | ![Git](https://img.shields.io/badge/Git-black) ![GitHub](https://img.shields.io/badge/GitHub-black) |  
 
 ---
-
-## 🏗 **Installation & Setup**  
-
-1. Clone the repository:  
-   ```bash  
-   git clone https://github.com/sarveshkulkarni486/exploremate.git  
-   ```  
-2. Navigate to the project directory:  
-   ```bash  
-   cd exploremate  
-   ```  
-3. Set up the backend:  
-   ```bash  
-   cd backend  
-   mvn install  
-   mvn spring-boot:run  
-   ```  
-4. Set up the frontend:  
-   ```bash  
-   cd frontend  
-   npm install  
-   npm start  
-   ```  
----
-
-## 🤝 **Contributing**  
-
-1. Clone the repository and create a new branch:  
-   ```bash  
-   git checkout -b feature-branch-name  
-   ```  
-2. Commit your changes:  
-   ```bash  
-   git commit -m "Description of changes"  
-   ```  
-3. Push to the branch:  
-   ```bash  
-   git push origin feature-branch-name  
-   ```  
-4. Open a pull request for review.  
-
----
-
-## 📜 **License**  
-This project is licensed under the [MIT License](LICENSE).  
-
----
-
-This version incorporates badges and emojis to make the `README.md` more visually appealing while retaining all necessary information. Let me know if you'd like further refinements!
